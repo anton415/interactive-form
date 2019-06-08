@@ -248,7 +248,11 @@ $submitButton.click((e) => {
     } else {
       $zip.css('border-color', '');
     }
+<<<<<<< HEAD
     const $cvvRegex = /^\d{3}$/;
+=======
+    const $cvvRegex = /^\d{5}$/;
+>>>>>>> 8a1b2cafc8df26c5793a1dc529957036752836db
     if (!$cvvRegex.test($cvv.val()))  {
       $cvv.css('border-color', 'red');
     } else {
