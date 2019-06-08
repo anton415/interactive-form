@@ -154,3 +154,46 @@ $activitiesFieldset.change(() => {
     $activitiesFieldset.append($('<label></label>').attr('id', 'total').text('Total: ' + total));
   }
 });
+
+
+// Display payment sections based on the payment option chosen in the select menu.
+const $payment = $('#payment');
+const $selectMethod = $('#payment option[value="select_method"]');
+
+const $creditCard = $('#payment option[value="credit card"]');
+const $paypal = $('#payment option[value="paypal"]');
+const $bitcoin = $('#payment option[value="bitcoin"]');
+
+const $creaditCardDiv = $('#credit-card');
+const $paypalDiv = $("body > div > form > fieldset:nth-child(4) > div:nth-child(5)");
+const $bitcoinDiv = $("body > div > form > fieldset:nth-child(4) > div:nth-child(6)");
+
+/*
+  The user should not be able to select the "Select Payment Method" option from
+  the payment select menu.
+*/
+$selectMethod.remove();
+
+/*
+  The "Credit Card" payment option should be selected by default.
+  Display the #credit-card div, and hide the "PayPal" and "Bitcoin" information.
+*/
+$creditCard.attr("selected", true);
+$paypalDiv.hide();
+$bitcoinDiv.hide();
+
+$payment.change(() => {
+  if($creditCard.is(':selected') === true) {
+    $creaditCardDiv.show();
+    $paypalDiv.hide();
+    $bitcoinDiv.hide();
+  } else if($paypal.is(':selected') === true) {
+    $creaditCardDiv.hide();
+    $paypalDiv.show();
+    $bitcoinDiv.hide();
+  } else if($bitcoin.is(':selected') === true) {
+    $creaditCardDiv.hide();
+    $paypalDiv.hide();
+    $bitcoinDiv.show();
+  }
+});
