@@ -30,7 +30,6 @@ $colorSelect.empty().append(
 );
 
 $designSelect.change(() => {
-  console.log($designSelect.val());
   if ($designSelect.val() == 'js puns') {
     $colorSelect.empty().append(
       $('<option></option>').attr('value', 'cornflowerblue').text('Cornflower Blue'),
@@ -47,5 +46,111 @@ $designSelect.change(() => {
     $colorSelect.empty().append(
       $('<option></option>').attr('value', 'default').text('First, Select Desig Theme')
     );
+  }
+});
+
+/*
+  Some events are at the same day and time as others. If the user selects a
+  workshop, don't allow selection of a workshop at the same day and time.
+*/
+const $activitiesFieldset = $('.activities');
+const $main = $('input[name=all]');
+const $jsFrameworks = $('input[name=js-frameworks]');
+const $jsLibs = $('input[name=js-libs]');
+const $jsExpress = $('input[name=express]');
+const $node = $('input[name=node]');
+const $buildTools = $('input[name=build-tools]');
+const $npm = $('input[name=npm]');
+var total = 0;
+const $totalLabel = $('<label></label>').text('Total: ' + total)
+
+$main.change(() => {
+  if ($main.is(":checked")) {
+    total += 200;
+  } else {
+    total -= 200;
+  }
+});
+
+$jsFrameworks.change(() => {
+  if ($jsFrameworks.is(":checked")) {
+    total += 100;
+    $jsExpress.attr("disabled", true);
+    $buildTools.attr("disabled", true);
+  } else {
+    total -= 100;
+    $jsExpress.removeAttr("disabled");
+    $buildTools.removeAttr("disabled");
+  }
+});
+
+$jsExpress.change(() => {
+  if ($jsExpress.is(":checked")) {
+    total += 100;
+    $jsFrameworks.attr("disabled", true);
+    $buildTools.attr("disabled", true);
+  } else {
+    total -= 100;
+    $jsFrameworks.removeAttr("disabled");
+    $buildTools.removeAttr("disabled");
+  }
+});
+
+$buildTools.change(() => {
+  if ($buildTools.is(":checked")) {
+    total += 100;
+    $jsFrameworks.attr("disabled", true);
+    $jsExpress.attr("disabled", true);
+  } else {
+    total -= 100;
+    $jsFrameworks.removeAttr("disabled");
+    $jsExpress.removeAttr("disabled");
+  }
+});
+
+$jsLibs.change(() => {
+  if ($jsLibs.is(":checked")) {
+    total += 100;
+    $node.attr("disabled", true);
+    $npm.attr("disabled", true);
+  } else {
+    total -= 100;
+    $node.removeAttr("disabled");
+    $npm.removeAttr("disabled");
+  }
+});
+
+$node.change(() => {
+  if ($node.is(":checked")) {
+    total += 100;
+    $jsLibs.attr("disabled", true);
+    $npm.attr("disabled", true);
+  } else {
+    total -= 100;
+    $jsLibs.removeAttr("disabled");
+    $npm.removeAttr("disabled");
+  }
+});
+
+$npm.change(() => {
+  if ($npm.is(":checked")) {
+    total += 100;
+    $jsLibs.attr("disabled", true);
+    $node.attr("disabled", true);
+  } else {
+    total -= 100;
+    $jsLibs.removeAttr("disabled");
+    $node.removeAttr("disabled");
+  }
+});
+
+/*
+  As a user selects activities, a running total should display below the list
+  of checkboxes.
+*/
+$activitiesFieldset.change(() => {
+  $('#total').remove();
+  if (total > 0) {
+    $activitiesFieldset.append($('<label></label>').attr('id', 'total').text('Total: ' + total));
   }
 });
