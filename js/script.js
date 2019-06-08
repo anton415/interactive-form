@@ -183,17 +183,76 @@ $paypalDiv.hide();
 $bitcoinDiv.hide();
 
 $payment.change(() => {
-  if($creditCard.is(':selected') === true) {
+  if($creditCard.is(':selected')) {
     $creaditCardDiv.show();
     $paypalDiv.hide();
     $bitcoinDiv.hide();
-  } else if($paypal.is(':selected') === true) {
+  } else if($paypal.is(':selected')) {
     $creaditCardDiv.hide();
     $paypalDiv.show();
     $bitcoinDiv.hide();
-  } else if($bitcoin.is(':selected') === true) {
+  } else if($bitcoin.is(':selected')) {
     $creaditCardDiv.hide();
     $paypalDiv.hide();
     $bitcoinDiv.show();
+  }
+});
+
+// Validation before submit.
+const $submitButton = $('button[type=submit]');
+const $nameInput = $('#name');
+const $mail = $('#mail');
+const $cardNumber = $('#cc-num');
+const $zip = $('#zip');
+const $cvv = $('#cvv');
+
+$submitButton.click((e) => {
+  e.preventDefault();
+  // Name field can't be blank.
+  if (!$nameInput.val()) {
+    $nameInput.css('border-color', 'red');
+  } else {
+    $nameInput.css('border-color', '');
+  }
+  // Email field must be a validly formatted e-mail address.
+  const $mailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if (!$mailRegex.test($mail.val())) {
+    $mail.css('border-color', 'red');
+  } else {
+    $mail.css('border-color', '');
+  }
+  /*
+    User must select at least one checkbox under the "Register for Activities"
+    section of the form.
+  */
+  if (total === 0) {
+    $activitiesFieldset.css('color', 'red');
+  } else {
+    $activitiesFieldset.css('color', '');
+  }
+  /*
+    If the selected payment option is "Credit Card," make sure the user has
+    supplied a Credit Card number, a Zip Code, and a 3 number CVV value before
+    the form can be submitted.
+  */
+  if($creditCard.is(':selected')) {
+    const $cardNumberRegex = /^\d{13,16}$/;
+    if (!$cardNumberRegex.test($cardNumber.val())) {
+      $cardNumber.css('border-color', 'red');
+    } else {
+      $cardNumber.css('border-color', '');
+    }
+    const $zipRegex = /^\d{5}$/;
+    if (!$zipRegex.test($zip.val()))  {
+      $zip.css('border-color', 'red');
+    } else {
+      $zip.css('border-color', '');
+    }
+    const $cvvRegex = /^\d{3}$/;
+    if (!$cvvRegex.test($cvv.val()))  {
+      $cvv.css('border-color', 'red');
+    } else {
+      $cvv.css('border-color', '');
+    }
   }
 });
