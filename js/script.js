@@ -76,11 +76,9 @@ $jsFrameworks.change(() => {
   if ($jsFrameworks.is(":checked")) {
     total += 100;
     $jsExpress.attr("disabled", true);
-    $buildTools.attr("disabled", true);
   } else {
     total -= 100;
     $jsExpress.removeAttr("disabled");
-    $buildTools.removeAttr("disabled");
   }
 });
 
@@ -88,23 +86,17 @@ $jsExpress.change(() => {
   if ($jsExpress.is(":checked")) {
     total += 100;
     $jsFrameworks.attr("disabled", true);
-    $buildTools.attr("disabled", true);
   } else {
     total -= 100;
     $jsFrameworks.removeAttr("disabled");
-    $buildTools.removeAttr("disabled");
   }
 });
 
 $buildTools.change(() => {
   if ($buildTools.is(":checked")) {
     total += 100;
-    $jsFrameworks.attr("disabled", true);
-    $jsExpress.attr("disabled", true);
   } else {
     total -= 100;
-    $jsFrameworks.removeAttr("disabled");
-    $jsExpress.removeAttr("disabled");
   }
 });
 
@@ -112,11 +104,9 @@ $jsLibs.change(() => {
   if ($jsLibs.is(":checked")) {
     total += 100;
     $node.attr("disabled", true);
-    $npm.attr("disabled", true);
   } else {
     total -= 100;
     $node.removeAttr("disabled");
-    $npm.removeAttr("disabled");
   }
 });
 
@@ -124,23 +114,17 @@ $node.change(() => {
   if ($node.is(":checked")) {
     total += 100;
     $jsLibs.attr("disabled", true);
-    $npm.attr("disabled", true);
   } else {
     total -= 100;
     $jsLibs.removeAttr("disabled");
-    $npm.removeAttr("disabled");
   }
 });
 
 $npm.change(() => {
   if ($npm.is(":checked")) {
     total += 100;
-    $jsLibs.attr("disabled", true);
-    $node.attr("disabled", true);
   } else {
     total -= 100;
-    $jsLibs.removeAttr("disabled");
-    $node.removeAttr("disabled");
   }
 });
 
