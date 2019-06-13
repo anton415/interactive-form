@@ -191,9 +191,10 @@ const $zip = $('#zip');
 const $cvv = $('#cvv');
 
 $submitButton.click((e) => {
-  e.preventDefault();
+
   // Name field can't be blank.
   if (!$nameInput.val()) {
+    e.preventDefault();
     $nameInput.css('border-color', 'red');
   } else {
     $nameInput.css('border-color', '');
@@ -201,6 +202,7 @@ $submitButton.click((e) => {
   // Email field must be a validly formatted e-mail address.
   const $mailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   if (!$mailRegex.test($mail.val())) {
+    e.preventDefault();
     $mail.css('border-color', 'red');
   } else {
     $mail.css('border-color', '');
@@ -210,6 +212,7 @@ $submitButton.click((e) => {
     section of the form.
   */
   if (total === 0) {
+    e.preventDefault();
     $activitiesFieldset.css('color', 'red');
   } else {
     $activitiesFieldset.css('color', '');
@@ -222,18 +225,21 @@ $submitButton.click((e) => {
   if($creditCard.is(':selected')) {
     const $cardNumberRegex = /^\d{13,16}$/;
     if (!$cardNumberRegex.test($cardNumber.val())) {
+      e.preventDefault();
       $cardNumber.css('border-color', 'red');
     } else {
       $cardNumber.css('border-color', '');
     }
     const $zipRegex = /^\d{5}$/;
     if (!$zipRegex.test($zip.val()))  {
+      e.preventDefault();
       $zip.css('border-color', 'red');
     } else {
       $zip.css('border-color', '');
     }
     const $cvvRegex = /^\d{3}$/;
     if (!$cvvRegex.test($cvv.val()))  {
+      e.preventDefault();
       $cvv.css('border-color', 'red');
     } else {
       $cvv.css('border-color', '');
