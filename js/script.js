@@ -6,9 +6,10 @@ $('#name').focus();
   selected from the "Job Role" drop down menu.
 */
 const $jobRoleTitle = $('#title');
-const $textboxForJobRoleTitle = $("<input type=text id=other-title placeholder='Your Job Role' style='display:none'>");
+const $textboxForJobRoleTitle = $('#other-title');
+$textboxForJobRoleTitle.hide();
 
-$jobRoleTitle.after($textboxForJobRoleTitle);
+//$jobRoleTitle.after($textboxForJobRoleTitle);
 
 $jobRoleTitle.change(() => {
   if ($jobRoleTitle.val() == 'other') {
